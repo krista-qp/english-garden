@@ -1,0 +1,123 @@
+{
+  "format": "Angļu dārzs lesson content v1. Hint syntax: letters in [brackets] are sounds Latvian has no letter for (th, w) and are shown underlined. {name} is replaced with the learner's name. listenOnly phrases are heard and understood but not drilled for speaking.",
+  "soundLessons": {
+    "th": {
+      "title": "Skaņa th",
+      "lv": "Mēles galu viegli novieto starp zobiem un pūt gaisu. Tas nav ne s, ne z. Pierakstā: [s] vai [z].",
+      "examples": ["thank you", "the", "this", "with"]
+    },
+    "w": {
+      "title": "Skaņa w",
+      "lv": "Lūpas apaļas kā 'u' un tad ātri atver. Zobi lūpām nepieskaras, tāpēc tas nav v. Pierakstā: [w].",
+      "examples": ["water", "what", "work", "with"]
+    }
+  },
+  "units": [
+    {
+      "id": "u1",
+      "titleLv": "Sveiki un palīdzība",
+      "titleEn": "Hello and help",
+      "strand": "travel",
+      "pic": "👋",
+      "phrases": [
+        { "id": "hello", "en": "Hello.", "lv": "Sveiki.", "hint": "helou", "de": "Hallo.", "pic": "👋" },
+        { "id": "myname", "en": "My name is {name}.", "lv": "Mani sauc {name}.", "hint": "mai neim iz {name}", "de": "Ich heiße {name}.", "hook": "name – Name", "pic": "🙂" },
+        { "id": "fromlatvia", "en": "I'm from Latvia.", "lv": "Es esmu no Latvijas.", "hint": "aim from letvija", "de": "Ich komme aus Lettland.", "pic": "🇱🇻" },
+        { "id": "nicetomeet", "en": "Nice to meet you.", "lv": "Prieks iepazīties.", "hint": "nais tu mīt jū", "de": "Freut mich.", "pic": "🤝" },
+        { "id": "alittle", "en": "A little.", "lv": "Mazliet.", "hint": "e litl", "de": "Ein bisschen.", "pic": "🤏" },
+        { "id": "sorry", "en": "Sorry?", "lv": "Atvainojiet, ko jūs teicāt?", "hint": "sori?", "de": "Wie bitte?", "pic": "❓" },
+        { "id": "slowly", "en": "Slowly, please.", "lv": "Lēnāk, lūdzu.", "hint": "slouli, plīz", "de": "Langsamer, bitte.", "pic": "🐢" },
+        { "id": "again", "en": "Again, please.", "lv": "Vēlreiz, lūdzu.", "hint": "egen, plīz", "de": "Noch einmal, bitte.", "pic": "🔁" },
+        { "id": "write", "en": "Can you write it, please?", "lv": "Vai jūs varat to uzrakstīt, lūdzu?", "hint": "ken jū rait it, plīz?", "de": "Können Sie es aufschreiben, bitte?", "pic": "✍️" },
+        { "id": "dontunderstand", "en": "I don't understand.", "lv": "Es nesaprotu.", "hint": "ai dount anderstend", "de": "Ich verstehe nicht.", "pic": "🤷" },
+        { "id": "thankyou", "en": "Thank you.", "lv": "Paldies.", "hint": "[s]enk jū", "de": "Danke.", "pic": "🙏" },
+        { "id": "goodbye", "en": "Goodbye.", "lv": "Uz redzēšanos.", "hint": "gudbai", "de": "Auf Wiedersehen.", "pic": "👋" }
+      ],
+      "dialogue": {
+        "titleLv": "Viesnīcas vestibilā",
+        "lines": [
+          { "who": "other", "en": "Hello! I'm Anna.", "lv": "Sveiki! Es esmu Anna." },
+          { "who": "learner", "phrase": "hello" },
+          { "who": "other", "en": "What's your name?", "lv": "Kā jūs sauc?" },
+          { "who": "learner", "phrase": "myname" },
+          { "who": "other", "en": "Where are you from?", "lv": "No kurienes jūs esat?" },
+          { "who": "learner", "phrase": "fromlatvia" },
+          { "who": "other", "en": "Do you speak English?", "lv": "Vai jūs runājat angliski?", "speed": "fast" },
+          { "who": "learner", "phrase": "slowly" },
+          { "who": "other", "en": "Do you speak English?", "lv": "Vai jūs runājat angliski?", "speed": "slow" },
+          { "who": "learner", "phrase": "alittle" },
+          { "who": "other", "en": "Nice to meet you!", "lv": "Prieks iepazīties!" },
+          { "who": "learner", "phrase": "nicetomeet" }
+        ]
+      },
+      "question": { "en": "Where are you from?", "lv": "No kurienes tu esi? Pastāsti angliski." }
+    },
+    {
+      "id": "u2",
+      "titleLv": "Kafejnīcā",
+      "titleEn": "Café",
+      "strand": "travel",
+      "pic": "☕",
+      "phrases": [
+        { "id": "coffee", "en": "A coffee, please.", "lv": "Kafiju, lūdzu.", "hint": "e kofi, plīz", "de": "Einen Kaffee, bitte.", "hook": "coffee – Kaffee", "pic": "☕" },
+        { "id": "teamilk", "en": "A tea with milk, please.", "lv": "Tēju ar pienu, lūdzu.", "hint": "e tī [w]i[z] milk, plīz", "de": "Einen Tee mit Milch, bitte.", "hook": "milk – Milch", "pic": "🫖" },
+        { "id": "nosugar", "en": "Without sugar.", "lv": "Bez cukura.", "hint": "[w]i[z]aut šuge", "de": "Ohne Zucker.", "pic": "🚫" },
+        { "id": "water", "en": "A glass of water, please.", "lv": "Glāzi ūdens, lūdzu.", "hint": "e glās ov [w]ōte, plīz", "de": "Ein Glas Wasser, bitte.", "hook": "water – Wasser", "pic": "🥛" },
+        { "id": "howmuch", "en": "How much is it?", "lv": "Cik tas maksā?", "hint": "hau mač iz it?", "de": "Was kostet das?", "pic": "💶" },
+        { "id": "bill", "en": "The bill, please.", "lv": "Rēķinu, lūdzu.", "hint": "[z]e bil, plīz", "de": "Die Rechnung, bitte.", "pic": "🧾" },
+        { "id": "card", "en": "Can I pay by card?", "lv": "Vai varu maksāt ar karti?", "hint": "ken ai pei bai kād?", "de": "Kann ich mit Karte zahlen?", "hook": "card – Karte", "pic": "💳" },
+        { "id": "wouldlike", "en": "What would you like?", "lv": "Ko jūs vēlētos?", "hint": "[w]ot [w]ud jū laik?", "de": "Was möchten Sie?", "pic": "🧑‍🍳", "listenOnly": true },
+        { "id": "hereyouare", "en": "Here you are.", "lv": "Lūdzu! (pasniedzot)", "hint": "hie jū ā", "de": "Bitte schön.", "pic": "🫴", "listenOnly": true }
+      ],
+      "dialogue": {
+        "titleLv": "Kafejnīcā Londonā",
+        "lines": [
+          { "who": "other", "en": "Hello! What would you like?", "lv": "Sveiki! Ko jūs vēlētos?" },
+          { "who": "learner", "phrase": "coffee" },
+          { "who": "other", "en": "With milk and sugar?", "lv": "Ar pienu un cukuru?" },
+          { "who": "learner", "phrase": "nosugar" },
+          { "who": "other", "en": "Here you are.", "lv": "Lūdzu!" },
+          { "who": "learner", "phrase": "thankyou" },
+          { "who": "other", "en": "Anything else?", "lv": "Vēl kaut ko?" },
+          { "who": "learner", "phrase": "bill" },
+          { "who": "other", "en": "That's four pounds fifty.", "lv": "Tas būs četras mārciņas piecdesmit." },
+          { "who": "learner", "phrase": "card" },
+          { "who": "other", "en": "Yes, of course.", "lv": "Jā, protams." }
+        ]
+      },
+      "question": { "en": "What do you drink in the morning?", "lv": "Ko tu dzer no rīta? Atbildi angliski." }
+    },
+    {
+      "id": "u3",
+      "titleLv": "Mans dārzs",
+      "titleEn": "My garden",
+      "strand": "her-world",
+      "pic": "🌱",
+      "phrases": [
+        { "id": "havegarden", "en": "I have a garden.", "lv": "Man ir dārzs.", "hint": "ai hev e gādn", "de": "Ich habe einen Garten.", "hook": "garden – Garten", "pic": "🏡" },
+        { "id": "tomatoes", "en": "I grow tomatoes.", "lv": "Es audzēju tomātus.", "hint": "ai grou tomātouz", "de": "Ich baue Tomaten an.", "hook": "tomatoes – Tomaten", "pic": "🍅" },
+        { "id": "roses", "en": "I love roses.", "lv": "Es mīlu rozes.", "hint": "ai lav rouziz", "de": "Ich liebe Rosen.", "hook": "roses – Rosen", "pic": "🌹" },
+        { "id": "appletree", "en": "The apple tree is old.", "lv": "Ābele ir veca.", "hint": "[z]i epl trī iz ould", "de": "Der Apfelbaum ist alt.", "hook": "apple – Apfel, old – alt", "pic": "🍎" },
+        { "id": "colours", "en": "The flowers are red and yellow.", "lv": "Puķes ir sarkanas un dzeltenas.", "hint": "[z]e flauez ā red end jelou", "de": "Die Blumen sind rot und gelb.", "pic": "🌼" },
+        { "id": "summer", "en": "In summer I work in the garden.", "lv": "Vasarā es strādāju dārzā.", "hint": "in same ai [w]ēk in [z]e gādn", "de": "Im Sommer arbeite ich im Garten.", "hook": "summer – Sommer", "pic": "☀️" },
+        { "id": "whatgrow", "en": "What do you grow?", "lv": "Ko jūs audzējat?", "hint": "[w]ot du jū grou?", "de": "Was bauen Sie an?", "pic": "🌿" },
+        { "id": "beautiful", "en": "It's beautiful!", "lv": "Tas ir skaisti!", "hint": "its bjūtiful", "de": "Das ist schön!", "pic": "✨" },
+        { "id": "yourgarden", "en": "Is this your garden?", "lv": "Vai šis ir jūsu dārzs?", "hint": "iz [z]is jō gādn?", "de": "Ist das Ihr Garten?", "pic": "🏡", "listenOnly": true }
+      ],
+      "dialogue": {
+        "titleLv": "Pie dārza vārtiņiem",
+        "lines": [
+          { "who": "other", "en": "Is this your garden?", "lv": "Vai šis ir jūsu dārzs?" },
+          { "who": "learner", "phrase": "havegarden" },
+          { "who": "other", "en": "What do you grow?", "lv": "Ko jūs audzējat?" },
+          { "who": "learner", "phrase": "tomatoes" },
+          { "who": "other", "en": "And flowers?", "lv": "Un puķes?" },
+          { "who": "learner", "phrase": "roses" },
+          { "who": "other", "en": "It's beautiful!", "lv": "Tas ir skaisti!" },
+          { "who": "learner", "phrase": "thankyou" }
+        ]
+      },
+      "question": { "en": "What do you grow in your garden?", "lv": "Ko tu audzē savā dārzā? Pastāsti angliski." }
+    }
+  ]
+}
