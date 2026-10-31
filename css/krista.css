@@ -1,0 +1,39 @@
+/* Krista's page: same tokens as the app, a wider and denser layout. */
+html { font-size: 16px; }
+.k-page { max-width: 860px; margin: 0 auto; padding: 16px 16px 48px; }
+.k-head h1 { margin: 8px 0 2px; }
+.k-section {
+  background: var(--surface); border: 1px solid var(--border); border-radius: 16px;
+  padding: 16px; margin: 16px 0; box-shadow: var(--shadow);
+}
+.k-section h2 { margin-top: 0; }
+.k-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; }
+.k-stat { background: var(--surface-2); border-radius: 12px; padding: 10px 12px; }
+.k-stat b { display: block; font-size: 1.8rem; }
+.k-units { margin: 12px 0 0; padding-left: 1.2em; }
+.k-garden { max-width: 420px; margin-top: 12px; }
+.k-msg { border-top: 1px solid var(--border); padding: 12px 0; }
+.k-msg:first-child { border-top: 0; }
+.k-meta { color: var(--muted); font-size: 0.9rem; margin: 0 0 4px; }
+.k-msg audio { width: 100%; margin: 6px 0; }
+.k-msg.mine { color: var(--muted); }
+.k-reply { display: flex; gap: 8px; margin-top: 6px; }
+.k-reply textarea, .k-section textarea, .k-section input[type=text] {
+  font: inherit; width: 100%; border-radius: 10px; border: 1px solid var(--border);
+  background: var(--bg); color: var(--text); padding: 8px 10px;
+}
+.k-section textarea.json { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 0.85rem; min-height: 180px; }
+.k-row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin-top: 8px; }
+.k-btn {
+  font: inherit; font-weight: 600; min-height: 44px; padding: 8px 14px; border-radius: 10px; cursor: pointer;
+  border: 1px solid var(--border); background: var(--secondary-bg); color: var(--secondary-text);
+}
+.k-btn.main { background: var(--primary); color: var(--on-primary); border-color: transparent; }
+.k-btn:disabled { opacity: 0.5; cursor: default; }
+.k-err { color: var(--soft); }
+.k-ok { color: var(--ok); }
+.k-preview { margin-top: 12px; display: grid; gap: 10px; }
+.k-preview .pb-row { grid-template-columns: auto 1fr; }
+.k-preview .de-line { color: var(--muted); margin: 0; }
+.k-code { font-family: ui-monospace, Menlo, Consolas, monospace; word-break: break-all; background: var(--surface-2); padding: 6px 8px; border-radius: 8px; }
+.k-dlg { margin: 0; padding-left: 1.2em; }
