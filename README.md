@@ -1,6 +1,6 @@
 # Angļu dārzs
 
-A small web app that teaches English to a Latvian speaker on an Android phone, with the focus on speaking. Progress is a garden: each phrase is a plant that grows as it is reviewed. Krista's page (`krista.html`) shows progress, collects spoken answers and publishes a weekly topic.
+A small web app that teaches English to a Latvian speaker on an Android phone, with the focus on speaking. Progress is a garden: each phrase is a plant that grows as it is reviewed. Krista's page (`krista.html`) shows progress, exchanges messages and publishes a weekly topic.
 
 The design decisions are in [`BUILD_BRIEF.md`](BUILD_BRIEF.md). Lessons live in [`content.json`](content.json), the only file you edit to change lessons.
 
@@ -64,5 +64,4 @@ On `krista.html`: type the topic, press **Kopēt uzvedni Claude** (it copies the
 ## Notes
 
 - Speech recognition on Android Chrome needs internet. Offline, or if the microphone is refused, every speaking step falls back to "Pateicu".
-- Recordings are opus at 24 kbps, at most 60 seconds, stored as base64 inside the Firestore message (free Spark plan, no Storage bucket).
 - After changing app files, bump `CACHE` in `sw.js` so phones drop the old cache sooner. The app already fetches fresh files whenever it is online.
