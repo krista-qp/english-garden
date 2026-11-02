@@ -771,7 +771,7 @@ function renderClose() {
       ${topBar(btn('done', `${icon('✕')} Beigt`, 'btn-quiet'))}
       <main class="content center-text">
         <h1 class="close-title">Šodien tu angliski pateici <span class="big-number">${n}</span> ${lvCount(n, 'teikumu', 'teikumus')}</h1>
-        <p class="muted">${grown.size ? 'Paskaties, kas tavā dārzā paaudzies.' : 'Lieliski pastrādāts.'}</p>
+        <p class="muted">${grown.size ? 'Paskaties, kas tavā siltumnīcā paaudzies.' : 'Lieliski pastrādāts.'}</p>
         <section class="garden-wrap">${gardenSvg(S.phrases, grown)}</section>
       </main>
       <footer class="actions">${btn('done', `${icon('🏡')} Uz dārzu`, 'primary')}</footer>
