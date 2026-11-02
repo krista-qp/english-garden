@@ -15,9 +15,19 @@ if (hasTts) {
   speechSynthesis.addEventListener?.('voiceschanged', loadVoices);
 }
 
+// Female British voices by name (Android/Chrome, iPhone, Windows). English prefers these.
+const FEMALE = /female|woman|kate|serena|martha|stephanie|fiona|moira|tessa|libby|sonia|hazel|susan|maisie|mia|abbi|bella|hollie|olivia|\bgba\b|gbc|gbg/i;
+const MALE = /\bmale\b|daniel|arthur|oliver|ryan|george|thomas|alfie|elliot|noah|\bgbb\b|gbd|rjs/i;
+
 function pickVoice(lang) {
   const want = lang.toLowerCase();
   const exact = voices.filter((v) => v.lang.replace('_', '-').toLowerCase() === want);
+  if (want.startsWith('en')) {
+    const female = exact.filter((v) => FEMALE.test(v.name) && !/\bmale\b/i.test(v.name));
+    const notMale = exact.filter((v) => !MALE.test(v.name));
+    const pool = female.length ? female : notMale.length ? notMale : exact;
+    return pool.find((v) => /google/i.test(v.name)) || pool.find((v) => v.localService) || pool[0] || null;
+  }
   return exact.find((v) => /google/i.test(v.name)) || exact.find((v) => v.localService) || exact[0] || null;
 }
 
@@ -41,7 +51,9 @@ export function speak(text, { lang = 'en-GB', rate = RATE.normal } = {}) {
     u.lang = lang;
     u.rate = rate;
     const v = pickVoice(lang);
-    if (v) u.voice = v;
+    if (v) {
+      try { u.voice = v; } catch { /* keep the default voice */ }
+    }
     u.onend = finish;
     u.onerror = finish;
     // Chrome sometimes drops an utterance queued straight after cancel().

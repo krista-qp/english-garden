@@ -40,5 +40,5 @@ export function validateUnit(unit, baseUnits = []) {
 }
 
 export function promptFor(topic, date) {
-  return `Make one lesson unit for Angļu dārzs as JSON in exactly the shape of the units in content.json. Topic: «${topic}». Learner: Latvian, English A1, understands German. 6–8 short, useful British-English phrases; for each: en, lv, hint (Latvian-letter pronunciation, [s]/[z] for th, [w] for w), de (whole phrase in German), hook (English–German cognate, only if real), pic (one emoji). Add a dialogue of 6–10 lines that uses only these phrases or ones from units u1–u3 on the learner's turns, and a question that invites a spoken answer. id = "topic-${date}".`;
+  return `Make one lesson unit for Angļu dārzs as JSON in exactly the shape of the units in content.json. Topic: «${topic}». Learner: Latvian, English A1, understands German. 6–8 short, useful British-English phrases; for each: en, lv, hint (Latvian-letter pronunciation, [s]/[z] for th, [w] for w), de (whole phrase in German), hook (English–German cognate, only if real), pic (one emoji). Add a dialogue of 6–10 lines that uses only these phrases or ones from units u1–u3 on the learner's turns. id = "topic-${date}".`;
 }

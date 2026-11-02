@@ -1,10 +1,10 @@
 // Angļu dārzs: the learner's app. All interface text is Latvian.
 import { load, save } from './store.js';
 import {
-  loadContent, lessonOrder, gardenUnits, weeklyUnits, unitById, keyOf, phraseByKey, resolvePhrase, soundsIn, soundLessons,
+  loadContent, lessonOrder, gardenUnits, unitById, keyOf, phraseByKey, resolvePhrase, soundsIn, soundLessons,
 } from './content.js';
 import {
-  speak, cancelSpeech, RATE, canRecognise, canRecord, listen, stopListening, startRecording, cancelRecording, playUrl, blobToDataUrl,
+  speak, cancelSpeech, RATE, canRecognise, canRecord, listen, stopListening, startRecording, cancelRecording, playUrl,
 } from './speech.js';
 import { isUnderstood } from './check.js';
 import * as srs from './srs.js';
@@ -228,13 +228,6 @@ function lastCompletedUnit() {
   return best;
 }
 
-function activeQuestion(cur, dlgId) {
-  const w = weeklyUnits()[0];
-  if (w?.question && Date.now() - (w.createdAt || 0) < 7 * 864e5) return { en: w.question.en, lv: w.question.lv, unitId: w.id };
-  const u = cur || unitById(dlgId) || lessonOrder().at(-1);
-  return u?.question ? { en: u.question.en, lv: u.question.lv, unitId: u.id } : null;
-}
-
 function isSpeakableKey(k) {
   const r = phraseByKey(k);
   return !!r && !r.phrase.listenOnly;
@@ -253,8 +246,6 @@ function buildSession() {
   }
   if (!dlg) dlg = lastCompletedUnit();
   if (dlg && unitById(dlg)?.dialogue?.lines?.length) steps.push({ type: 'dialogue', unitId: dlg });
-  const q = activeQuestion(cur, dlg);
-  if (q) steps.push({ type: 'words', ...q });
   steps.push({ type: 'close' });
   return { day: today, steps, idx: 0, grown: [] };
 }
@@ -268,7 +259,7 @@ function runStep() {
     case 'review': return renderReview(st);
     case 'new': return renderNew(st);
     case 'dialogue': return renderDialogue(st);
-    case 'words': return renderWords(st);
+    case 'words': return skipStep(); // removed step; may linger in a saved session
     default: return renderClose();
   }
 }
@@ -730,99 +721,6 @@ function renderDialogue(st) {
   }
 
   setTimeout(() => my === gen && advance(), 350);
-}
-
-/* ---------- Mani vārdi: her own spoken answer ---------- */
-
-const fmt = (ms) => {
-  const s = Math.min(60, Math.floor(ms / 1000));
-  return `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`;
-};
-
-function renderWords(st) {
-  let rec = null;
-  let blob = null;
-  let url = null;
-  const intro = 'Ieraksti savu atbildi (līdz 1 minūtei).';
-  const h = {
-    end: endSession,
-    q: () => speak(st.en),
-    skip: () => skipStep(),
-  };
-  const my = mount(
-    'words',
-    `<div class="screen">
-      ${topBar(endBtn(), stepCounter())}
-      <main class="content">
-        <p class="kicker">Mani vārdi</p>
-        <h2 class="en" lang="en-GB">${esc(st.en)}</h2>
-        ${btn('q', `${icon('🔊')} Klausīties jautājumu`, 'btn-secondary wide')}
-        <p class="lv">${esc(st.lv)}</p>
-        <div id="rec-ui" class="rec-ui"></div>
-      </main>
-      <footer class="actions">
-        <p class="fb" id="fb" role="status" aria-live="polite">${intro}</p>
-        <div class="slot" id="slot"></div>
-        <div class="slot2" id="slot2"></div>
-      </footer>
-    </div>`,
-    h,
-  );
-  const recUi = document.getElementById('rec-ui');
-  const idle = () => {
-    setSlot(btn('rec', `${icon('🎙️')} Ierakstīt atbildi`, 'primary'));
-    setSlot2(btn('skip', `Izlaist ${icon('→')}`, 'btn-quiet wide'));
-  };
-  const recorded = () => {
-    setFb('Gatavs! Noklausies un sūti Kristai.');
-    recUi.innerHTML = btn('play', `${icon('▶')} Noklausīties`, 'btn-secondary wide');
-    setSlot(btn('send', `${icon('📨')} Sūtīt Kristai`, 'primary'));
-    setSlot2(btn('again', `${icon('🔁')} Vēlreiz`, 'btn-quiet wide'));
-  };
-  h.rec = async () => {
-    try {
-      rec = await startRecording({ maxMs: 60000, onTick: (ms) => my === gen && setFb(`Ieraksta… ${fmt(ms)} no 1:00`, 'listening') });
-    } catch {
-      setFb('Mikrofons nav pieejams. Vari pastāstīt skaļi tāpat.', 'soft');
-      setSlot(btn('skip', `Tālāk ${icon('→')}`, 'primary'));
-      setSlot2('');
-      return;
-    }
-    setFb(`Ieraksta… 0:00 no 1:00`, 'listening');
-    setSlot(btn('stop', `${icon('⏹️')} Apturēt`, 'primary'));
-    setSlot2('');
-    rec.done.then((res) => {
-      if (my !== gen) return;
-      ({ blob, url } = res);
-      recorded();
-    }).catch(() => {});
-  };
-  h.stop = () => rec?.stop();
-  h.play = () => url && playUrl(url);
-  h.again = () => {
-    if (url) URL.revokeObjectURL(url);
-    blob = url = null;
-    recUi.innerHTML = '';
-    setFb(intro);
-    idle();
-  };
-  h.send = async (el) => {
-    el.disabled = true;
-    const dataUrl = await blobToDataUrl(blob);
-    if (dataUrl.length > 950000) {
-      setFb('Ieraksts ir par garu. Pamēģini īsāk.', 'soft');
-      el.disabled = false;
-      return;
-    }
-    sendMessage({ kind: 'audio', audio: dataUrl, text: st.en, unitId: st.unitId || null });
-    completeStep();
-    recUi.innerHTML = '';
-    setFb(syncEnabled() && navigator.onLine ? 'Nosūtīts! Krista noklausīsies. 💌' : 'Saglabāts. Nosūtīsim Kristai, kad būs internets. 💌', 'ok');
-    setSlot(btn('next', `Tālāk ${icon('→')}`, 'primary'));
-    setSlot2('');
-    h.next = runStep;
-  };
-  idle();
 }
 
 /* ---------- close ---------- */
