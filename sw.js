@@ -1,7 +1,7 @@
 // Service worker: caches the app shell so the app works offline.
 // Own files: network first (so edits to content.json show up), cache when offline.
-// Firebase SDK from gstatic: cache first (the URLs are versioned).
-const CACHE = 'angludarzs-v5';
+// Firebase SDK and Google Fonts: cache first (the URLs are versioned).
+const CACHE = 'angludarzs-v6';
 const SHELL = [
   './',
   'index.html',
@@ -65,7 +65,8 @@ self.addEventListener('fetch', (e) => {
     return;
   }
 
-  if (url.hostname === 'www.gstatic.com' && url.pathname.startsWith('/firebasejs/')) {
+  const fonts = url.hostname === 'fonts.googleapis.com' || url.hostname === 'fonts.gstatic.com';
+  if (fonts || (url.hostname === 'www.gstatic.com' && url.pathname.startsWith('/firebasejs/'))) {
     e.respondWith(
       caches.match(req).then(
         (hit) => hit || fetch(req).then((res) => {

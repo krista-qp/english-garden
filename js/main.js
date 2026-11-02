@@ -20,11 +20,11 @@ let screenName = '';
 
 const MSG = {
   listening: 'Klausos… Runā tagad.',
-  ok: 'Sapratu! 👍',
+  ok: 'Sapratu!',
   again: 'Pamēģini vēlreiz.',
   moveOn: 'Lieliski, ejam tālāk.',
   fallback: 'Pasaki skaļi angliski un tad piespied «Pateicu».',
-  saidOk: 'Labi! 👍',
+  saidOk: 'Labi!',
 };
 
 /* ---------- small building blocks ---------- */
@@ -61,7 +61,33 @@ function mount(name, html, h = {}) {
   return gen;
 }
 
-const icon = (e) => `<span class="ic" aria-hidden="true">${e}</span>`;
+// Line icons (24×24, stroked with the text colour). Every button also has a word.
+const ICONS = {
+  '←': '<path d="M19 12H5M11 18l-6-6 6-6"/>',
+  '→': '<path d="M5 12h14M13 6l6 6-6 6"/>',
+  '▶': '<path d="M8 5v14l11-7z"/>',
+  '⚙️': '<path d="M4 7h9M17 7h3M4 17h3M11 17h9"/><circle cx="15" cy="7" r="2"/><circle cx="9" cy="17" r="2"/>',
+  '✅': '<path d="M20 6 9 17l-5-5"/>',
+  '✓': '<path d="M20 6 9 17l-5-5"/>',
+  '👍': '<path d="M20 6 9 17l-5-5"/>',
+  '✕': '<path d="M18 6 6 18M6 6l12 12"/>',
+  '🌱': '<path d="M12 21v-9M12 12C12 8 9.5 6 5 6c0 4 2.5 6 7 6ZM12 10c0-3.5 2.2-5.5 7-5.5 0 3.5-2.2 5.5-7 5.5Z"/>',
+  '🎙️': '<rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21"/>',
+  '🎤': '<rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21"/>',
+  '🏡': '<path d="M4 10.5 12 4l8 6.5V20H4z"/><path d="M10 20v-5h4v5"/>',
+  '🐢': '<circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/>',
+  '👀': '<path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12Z"/><circle cx="12" cy="12" r="2.8"/>',
+  '💌': '<rect x="3" y="5.5" width="18" height="13" rx="2"/><path d="m3.5 7 8.5 6 8.5-6"/>',
+  '📨': '<rect x="3" y="5.5" width="18" height="13" rx="2"/><path d="m3.5 7 8.5 6 8.5-6"/>',
+  '💡': '<path d="M9.5 18h5M10.5 21h3M12 3a6 6 0 0 0-3.8 10.6c.7.6 1.3 1.5 1.3 2.4h5c0-.9.6-1.8 1.3-2.4A6 6 0 0 0 12 3Z"/>',
+  '💬': '<path d="M20.5 11.5a8 8 0 0 1-11.7 7.1L4 20l1.3-4.4a8 8 0 1 1 15.2-4.1Z"/>',
+  '🔊': '<path d="M11 5 6.5 9H3.5v6h3L11 19z"/><path d="M15.5 9a4.5 4.5 0 0 1 0 6M18.5 6a8.5 8.5 0 0 1 0 12"/>',
+  '🧳': '<path d="M5 4.5h11.5a2 2 0 0 1 2 2V20H7a2 2 0 0 1-2-2zM5 18a2 2 0 0 1 2-2h11.5M9 8.5h6"/>',
+};
+const icon = (e) =>
+  ICONS[e]
+    ? `<svg class="ic" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${ICONS[e]}</svg>`
+    : `<span class="ic" aria-hidden="true">${e}</span>`;
 const btn = (act, label, cls = '', extra = '') =>
   `<button type="button" class="btn ${cls}" data-act="${act}" ${extra}>${label}</button>`;
 const nameOf = () => S.profile?.name || '';
@@ -115,8 +141,8 @@ function renderFirst() {
     'first',
     `<div class="screen first">
       <main class="content center">
-        <div class="pic" aria-hidden="true">🌱</div>
-        <h1>Angļu dārzs</h1>
+        <p class="kicker">Angļu valoda</p>
+        <h1 class="brand">Angļu dārzs</h1>
         <form id="name-form" class="stack">
           <label for="name" class="big-label">Kā tevi sauc?</label>
           <input id="name" class="input" autocomplete="given-name" autocapitalize="words" enterkeyhint="done" required>
@@ -141,6 +167,11 @@ function renderFirst() {
 
 /* ---------- home: Mans dārzs ---------- */
 
+function todayLabel() {
+  const t = new Date().toLocaleDateString('lv-LV', { weekday: 'long', day: 'numeric', month: 'long' });
+  return t.charAt(0).toUpperCase() + t.slice(1);
+}
+
 function greeting() {
   const h = new Date().getHours();
   if (h >= 5 && h < 12) return 'Labrīt';
@@ -162,18 +193,24 @@ function renderHome() {
   mount(
     'home',
     `<div class="screen home">
-      ${topBar(`<h1 class="greet">${greeting()}, ${esc(nameOf())}!</h1>`, btn('settings', `${icon('⚙️')} Iestatījumi`, 'btn-quiet small'))}
+      ${topBar(`<div><p class="date">${esc(todayLabel())}</p><h1 class="greet">${greeting()}, ${esc(nameOf())}</h1></div>`, btn('settings', `${icon('⚙️')} Iestatījumi`, 'btn-quiet small'))}
       <main class="content">
         ${msg ? `<section class="card message">
-            <p class="msg-from">${icon('💌')} Ziņa no Kristas</p>
+            <p class="msg-from">Ziņa no Kristas</p>
             <p class="msg-text">${esc(msg.text)}</p>
             ${btn('read', `${icon('✓')} Izlasīju`, 'btn-secondary', `data-id="${esc(msg.id)}"`)}
           </section>` : ''}
         <section class="garden-wrap">
-          <h2 class="section-title">Mans dārzs</h2>
+          <h2 class="sr-only">Mans dārzs</h2>
           ${gardenSvg(S.phrases)}
         </section>
-        <p class="week">Šonedēļ: <b>${ws.sentences}</b> ${lvCount(ws.sentences, 'teikums', 'teikumi')} angliski · <b>${ws.days}</b> ${lvCount(ws.days, 'diena', 'dienas')}</p>
+        <div class="week" aria-label="Šonedēļ: ${ws.sentences} ${lvCount(ws.sentences, 'teikums', 'teikumi')} angliski, ${ws.days} ${lvCount(ws.days, 'diena', 'dienas')}">
+          <p class="kicker">Šonedēļ</p>
+          <div class="stats">
+            <p><b>${ws.sentences}</b><span>${lvCount(ws.sentences, 'teikums', 'teikumi')} angliski</span></p>
+            <p><b>${ws.days}</b><span>${lvCount(ws.days, 'diena', 'dienas')}</span></p>
+          </div>
+        </div>
         <div class="row-btns">
           ${btn('phrasebook', `${icon('🧳')} Ceļojuma vārdnīca`, 'btn-secondary')}
           ${btn('wish', `${icon('💡')} Gribu iemācīties…`, 'btn-secondary')}
@@ -413,7 +450,7 @@ function cardBody(p) {
     ${showHint ? `<p class="hint"><span class="sr-only">Izruna: </span>${hintHtml(p.hint, nameOf())}</p>` : ''}
     <p class="lv">${esc(lvOf(p))}</p>
     ${de ? `<div class="de">
-        <p><span class="de-label">Vāciski:</span> <span lang="de">${esc(withName(p.de, nameOf()))}</span></p>
+        <p><span class="de-label">Vāciski</span><span lang="de">${esc(withName(p.de, nameOf()))}</span></p>
         ${btn('de', `${icon('🔊')} Vāciski`, 'btn-small')}
         ${p.hook ? `<p class="hook">Līdzīgi vārdi: ${esc(p.hook)}</p>` : ''}
       </div>` : ''}`;
@@ -648,7 +685,7 @@ function renderDialogue(st) {
     const u = S.units[unit.id] || (S.units[unit.id] = { introduced: 0 });
     u.dialogueRuns = (u.dialogueRuns || 0) + 1;
     completeStep();
-    turn.innerHTML = '<p class="done">Saruna pabeigta! 🎉</p>';
+    turn.innerHTML = '<p class="done">Saruna pabeigta.</p>';
     setFb('');
     setSlot(btn('next', `Tālāk ${icon('→')}`, 'primary'));
     h.next = runStep;
@@ -733,9 +770,8 @@ function renderClose() {
     `<div class="screen">
       ${topBar(btn('done', `${icon('✕')} Beigt`, 'btn-quiet'))}
       <main class="content center-text">
-        <div class="pic small-pic" aria-hidden="true">🌼</div>
-        <h1 class="close-title">Šodien tu angliski pateici <b>${n}</b> ${lvCount(n, 'teikumu', 'teikumus')}!</h1>
-        <p class="muted">${grown.size ? 'Paskaties, kas tavā dārzā paaudzies.' : 'Lieliski pastrādāts.'}</p>
+        <h1 class="close-title">Šodien tu angliski pateici <span class="big-number">${n}</span> ${lvCount(n, 'teikumu', 'teikumus')}</h1>
+        <p class="muted">${grown.size ? 'Paskaties, kas tavā siltumnīcā paaudzies.' : 'Lieliski pastrādāts.'}</p>
         <section class="garden-wrap">${gardenSvg(S.phrases, grown)}</section>
       </main>
       <footer class="actions">${btn('done', `${icon('🏡')} Uz dārzu`, 'primary')}</footer>
@@ -752,7 +788,7 @@ function renderPhrasebook() {
       const met = u.phrases.slice(0, introducedCount(u.id));
       if (!met.length) return '';
       return `<section class="pb-unit">
-        <h2 class="section-title">${esc(u.pic || '')} ${esc(u.titleLv || u.id)}</h2>
+        <h2 class="section-title">${esc(u.titleLv || u.id)}</h2>
         <ul class="pb-list">${met
           .map((p) => {
             const t = enOf(p);
@@ -802,7 +838,7 @@ function renderWish() {
       if (!text) return ta.focus();
       sendMessage({ kind: 'request', text });
       ta.value = '';
-      setFb(syncEnabled() && navigator.onLine ? 'Nosūtīts! Krista sagatavos jaunu tēmu. 💌' : 'Saglabāts. Nosūtīsim Kristai, kad būs internets. 💌', 'ok');
+      setFb(syncEnabled() && navigator.onLine ? 'Nosūtīts! Krista sagatavos jaunu tēmu.' : 'Saglabāts. Nosūtīsim Kristai, kad būs internets.', 'ok');
       setSlot(btn('back', `${icon('🏡')} Uz dārzu`, 'primary'));
     },
   };
@@ -878,7 +914,6 @@ async function boot() {
     mount(
       'error',
       `<div class="screen"><main class="content center">
-        <div class="pic" aria-hidden="true">📶</div>
         <h1>Neizdevās ielādēt nodarbības</h1>
         <p>Pieslēdzies internetam un mēģini vēlreiz.</p>
       </main><footer class="actions">${btn('reload', 'Mēģināt vēlreiz', 'primary')}</footer></div>`,

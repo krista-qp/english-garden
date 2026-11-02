@@ -72,7 +72,7 @@ export function soundsIn(phrase) {
   return out;
 }
 
-export const UNIT_COLOURS = ['#d9467a', '#e0892b', '#8a5cd6', '#2f8fd8', '#c23b3b', '#1f9e8a'];
+export const UNIT_COLOURS = ['#c8553d', '#d29a2c', '#5a73a8', '#8b5a9f', '#3b8f7a', '#b2486e'];
 
 export function unitColour(unit) {
   if (unit.color) return unit.color;
