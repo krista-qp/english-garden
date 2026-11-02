@@ -1,7 +1,7 @@
 // Service worker: caches the app shell so the app works offline.
 // Own files: network first (so edits to content.json show up), cache when offline.
 // Firebase SDK from gstatic: cache first (the URLs are versioned).
-const CACHE = 'angludarzs-v1';
+const CACHE = 'angludarzs-v2';
 const SHELL = [
   './',
   'index.html',
