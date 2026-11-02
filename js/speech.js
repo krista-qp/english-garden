@@ -7,17 +7,45 @@ const hasTts = typeof window !== 'undefined' && 'speechSynthesis' in window;
 export const RATE = { normal: 0.9, slow: 0.6, fast: 1.05 };
 
 let voices = [];
+let preferredUri = null;
+const voiceListeners = new Set();
 function loadVoices() {
   voices = speechSynthesis.getVoices();
+  for (const fn of voiceListeners) fn();
 }
 if (hasTts) {
   loadVoices();
   speechSynthesis.addEventListener?.('voiceschanged', loadVoices);
 }
 
+const langOf = (v) => v.lang.replace('_', '-').toLowerCase();
+
+/** British English voices on this device (falls back to any English voice). */
+export function englishVoices() {
+  const seen = new Set();
+  const uniq = (list) => list.filter((v) => !seen.has(v.name) && seen.add(v.name));
+  const gb = uniq(voices.filter((v) => langOf(v) === 'en-gb'));
+  return gb.length ? gb : uniq(voices.filter((v) => langOf(v).startsWith('en')));
+}
+
+/** Calls fn whenever the device's voice list changes; returns an unsubscribe. */
+export function onVoicesChanged(fn) {
+  voiceListeners.add(fn);
+  return () => voiceListeners.delete(fn);
+}
+
+/** The English voice to use, by voiceURI; null means the device default. */
+export function setPreferredVoice(uri) {
+  preferredUri = uri || null;
+}
+
 function pickVoice(lang) {
   const want = lang.toLowerCase();
-  const exact = voices.filter((v) => v.lang.replace('_', '-').toLowerCase() === want);
+  if (want.startsWith('en') && preferredUri) {
+    const chosen = voices.find((v) => v.voiceURI === preferredUri);
+    if (chosen) return chosen;
+  }
+  const exact = voices.filter((v) => langOf(v) === want);
   return exact.find((v) => /google/i.test(v.name)) || exact.find((v) => v.localService) || exact[0] || null;
 }
 
@@ -41,7 +69,9 @@ export function speak(text, { lang = 'en-GB', rate = RATE.normal } = {}) {
     u.lang = lang;
     u.rate = rate;
     const v = pickVoice(lang);
-    if (v) u.voice = v;
+    if (v) {
+      try { u.voice = v; } catch { /* keep the default voice */ }
+    }
     u.onend = finish;
     u.onerror = finish;
     // Chrome sometimes drops an utterance queued straight after cancel().

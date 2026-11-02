@@ -5,6 +5,7 @@ import {
 } from './content.js';
 import {
   speak, cancelSpeech, RATE, canRecognise, canRecord, listen, stopListening, startRecording, cancelRecording, playUrl,
+  englishVoices, onVoicesChanged, setPreferredVoice,
 } from './speech.js';
 import { isUnderstood } from './check.js';
 import * as srs from './srs.js';
@@ -842,15 +843,26 @@ function renderSettings() {
           ${toggle('showDe', 'Rādīt teikumu vāciski', st.showDe)}
           ${toggle('showHints', 'Rādīt izrunas norādes', st.showHints)}
           ${toggle('checkSpeech', 'Pārbaudīt runu ar mikrofonu', st.checkSpeech && canRecognise())}
+          <fieldset class="voices">
+            <legend class="big-label">Angļu balss</legend>
+            <p class="muted">Izvēlies balsi un paklausies.</p>
+            <div id="voice-list"></div>
+          </fieldset>
         </form>
         <p class="muted">${link}</p>
       </main>
       <footer class="actions">${btn('save', `${icon('✓')} Saglabāt`, 'primary')}</footer>
     </div>`,
     {
-      back: goHome,
+      back: () => {
+        setPreferredVoice(st.voiceURI);
+        goHome();
+      },
       submit: () => handlers.save(),
       save: () => {
+        const picked = document.querySelector('input[name=voice]:checked');
+        st.voiceURI = picked ? picked.value || null : st.voiceURI || null;
+        setPreferredVoice(st.voiceURI);
         const name = document.getElementById('name').value.trim();
         if (name) S.profile = { ...S.profile, name };
         st.showDe = document.getElementById('showDe').checked;
@@ -861,12 +873,41 @@ function renderSettings() {
       },
     },
   );
+  fillVoiceList();
+  document.getElementById('voice-list').addEventListener('change', (e) => {
+    if (e.target.name !== 'voice') return;
+    setPreferredVoice(e.target.value || null);
+    speak('Hello. Nice to meet you.');
+  });
 }
+
+function voiceLabel(v, i) {
+  const kind = /female|woman/i.test(v.name) ? ' · sieviete' : /\bmale\b|man\b/i.test(v.name) ? ' · vīrietis' : '';
+  return `<span>Balss ${i + 1}${kind}<br><small class="muted" lang="en">${esc(v.name)}</small></span>`;
+}
+
+function fillVoiceList() {
+  const box = document.getElementById('voice-list');
+  if (!box) return;
+  const list = englishVoices();
+  const current = S.settings.voiceURI || '';
+  const known = list.some((v) => v.voiceURI === current);
+  const radio = (value, label, on) => `<label class="toggle"><input type="radio" name="voice" value="${esc(value)}" ${on ? 'checked' : ''}>${label}</label>`;
+  box.innerHTML = list.length
+    ? radio('', '<span>Automātiski</span>', !known) + list.map((v, i) => radio(v.voiceURI, voiceLabel(v, i), v.voiceURI === current)).join('')
+    : '<p class="muted">Šajā ierīcē angļu balsis nav atrastas.</p>';
+  if (list.length === 1) box.insertAdjacentHTML('beforeend', '<p class="muted">Šajā telefonā ir tikai viena angļu balss. Vairāk balsu var pievienot tālruņa iestatījumos (teksta pārvēršana runā).</p>');
+}
+
+onVoicesChanged(() => {
+  if (screenName === 'settings') fillVoiceList();
+});
 
 /* ---------- start ---------- */
 
 async function boot() {
   S = await load();
+  setPreferredVoice(S.settings.voiceURI);
   const fam = readJoin();
   if (fam) {
     S.familyId = fam;

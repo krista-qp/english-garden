@@ -292,3 +292,11 @@ h2.en { font-size: 1.7rem; }
 .pb-en { font-size: 1.3rem; font-weight: 700; }
 .pb-lv { color: var(--muted); }
 .pb-btns { grid-column: 1 / -1; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+
+/* ---------- settings: voice list ---------- */
+
+.voices { border: 0; padding: 0; margin: 8px 0 0; display: flex; flex-direction: column; gap: 10px; }
+.voices legend { padding: 0; margin-bottom: 2px; }
+.voices p { margin: 0; }
+#voice-list { display: flex; flex-direction: column; gap: 10px; }
+.toggle small { font-size: 0.85rem; }
