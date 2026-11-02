@@ -1,0 +1,10 @@
+{
+  "name": "english-garden",
+  "private": true,
+  "type": "module",
+  "description": "Angļu dārzs. No build step; this file only exists to run the tests.",
+  "scripts": {
+    "test": "node --test tests/*.test.js",
+    "serve": "python3 -m http.server 8080"
+  }
+}
