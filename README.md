@@ -63,6 +63,5 @@ On `krista.html`: type the topic, press **Kopēt uzvedni Claude** (it copies the
 
 ## Notes
 
-- The English voice can be changed in Iestatījumi → Angļu balss. The list shows the British voices installed on that phone; more can be added in the phone's text-to-speech settings.
 - Speech recognition on Android Chrome needs internet. Offline, or if the microphone is refused, every speaking step falls back to "Pateicu".
 - After changing app files, bump `CACHE` in `sw.js` so phones drop the old cache sooner. The app already fetches fresh files whenever it is online.

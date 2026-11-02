@@ -7,45 +7,27 @@ const hasTts = typeof window !== 'undefined' && 'speechSynthesis' in window;
 export const RATE = { normal: 0.9, slow: 0.6, fast: 1.05 };
 
 let voices = [];
-let preferredUri = null;
-const voiceListeners = new Set();
 function loadVoices() {
   voices = speechSynthesis.getVoices();
-  for (const fn of voiceListeners) fn();
 }
 if (hasTts) {
   loadVoices();
   speechSynthesis.addEventListener?.('voiceschanged', loadVoices);
 }
 
-const langOf = (v) => v.lang.replace('_', '-').toLowerCase();
-
-/** British English voices on this device (falls back to any English voice). */
-export function englishVoices() {
-  const seen = new Set();
-  const uniq = (list) => list.filter((v) => !seen.has(v.name) && seen.add(v.name));
-  const gb = uniq(voices.filter((v) => langOf(v) === 'en-gb'));
-  return gb.length ? gb : uniq(voices.filter((v) => langOf(v).startsWith('en')));
-}
-
-/** Calls fn whenever the device's voice list changes; returns an unsubscribe. */
-export function onVoicesChanged(fn) {
-  voiceListeners.add(fn);
-  return () => voiceListeners.delete(fn);
-}
-
-/** The English voice to use, by voiceURI; null means the device default. */
-export function setPreferredVoice(uri) {
-  preferredUri = uri || null;
-}
+// Female British voices by name (Android/Chrome, iPhone, Windows). English prefers these.
+const FEMALE = /female|woman|kate|serena|martha|stephanie|fiona|moira|tessa|libby|sonia|hazel|susan|maisie|mia|abbi|bella|hollie|olivia|\bgba\b|gbc|gbg/i;
+const MALE = /\bmale\b|daniel|arthur|oliver|ryan|george|thomas|alfie|elliot|noah|\bgbb\b|gbd|rjs/i;
 
 function pickVoice(lang) {
   const want = lang.toLowerCase();
-  if (want.startsWith('en') && preferredUri) {
-    const chosen = voices.find((v) => v.voiceURI === preferredUri);
-    if (chosen) return chosen;
+  const exact = voices.filter((v) => v.lang.replace('_', '-').toLowerCase() === want);
+  if (want.startsWith('en')) {
+    const female = exact.filter((v) => FEMALE.test(v.name) && !/\bmale\b/i.test(v.name));
+    const notMale = exact.filter((v) => !MALE.test(v.name));
+    const pool = female.length ? female : notMale.length ? notMale : exact;
+    return pool.find((v) => /google/i.test(v.name)) || pool.find((v) => v.localService) || pool[0] || null;
   }
-  const exact = voices.filter((v) => langOf(v) === want);
   return exact.find((v) => /google/i.test(v.name)) || exact.find((v) => v.localService) || exact[0] || null;
 }
 
