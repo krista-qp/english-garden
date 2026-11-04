@@ -17,6 +17,7 @@ export function defaults() {
     stats: { sentencesTotal: 0, byDay: {} },
     units: {}, // unitId -> {introduced, dialogueRuns, completedAt}
     seenSounds: {},
+    trouble: {}, // phraseKey -> {misses, giveUps, heard: [], last}
     session: null,
     weeklyUnits: {}, // unitId -> {unit, createdAt}
     inbox: {}, // messages from Krista: id -> message

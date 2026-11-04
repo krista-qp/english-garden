@@ -89,6 +89,7 @@ async function restoreIfNew() {
     if (r.stats) s.stats = { sentencesTotal: 0, byDay: {}, ...r.stats };
     if (r.units) s.units = r.units;
     if (r.seenSounds) s.seenSounds = r.seenSounds;
+    if (r.trouble) s.trouble = r.trouble;
     if (!s.profile?.name && r.name) s.profile = { name: r.name };
   }
   save();
@@ -150,6 +151,7 @@ export async function pushProgress() {
       units: s.units,
       phrases: s.phrases,
       seenSounds: s.seenSounds,
+      trouble: s.trouble || {},
       updatedAt: Date.now(),
     });
   } catch (e) {
