@@ -259,7 +259,8 @@
       "pic": "🙋‍♀️",
       "phrases": [
         { "id": "livelatvia", "en": "I live in Latvia.", "lv": "Es dzīvoju Latvijā.", "hint": "ai liv in letvija", "de": "Ich wohne in Lettland.", "pic": "🏠" },
-        { "id": "retired", "en": "I am retired.", "lv": "Esmu pensijā.", "hint": "ai em ritaied", "de": "Ich bin in Rente.", "pic": "🪑" },
+        { "id": "workeducation", "en": "I work in education.", "lv": "Es strādāju izglītības jomā.", "hint": "ai [w]ēk in edjukeišn", "de": "Ich arbeite im Bildungsbereich.", "hook": "work – Werk", "pic": "🏫" },
+        { "id": "hobbies", "en": "My hobbies are art and gardening.", "lv": "Mani vaļasprieki ir māksla un dārzkopība.", "hint": "mai hobiz ā āt end gādnin", "de": "Meine Hobbys sind Kunst und Gartenarbeit.", "hook": "hobbies – Hobbys, garden – Garten", "pic": "🎨" },
         { "id": "daughter", "en": "My daughter lives in Sweden.", "lv": "Mana meita dzīvo Zviedrijā.", "hint": "mai dōte livz in s[w]īdn", "de": "Meine Tochter wohnt in Schweden.", "hook": "daughter – Tochter", "pic": "👩" },
         { "id": "speakgerman", "en": "I speak a little German.", "lv": "Es mazliet runāju vāciski.", "hint": "ai spīk e litl džēmen", "de": "Ich spreche ein bisschen Deutsch.", "pic": "🗣️" },
         { "id": "learning", "en": "I am learning English.", "lv": "Es mācos angļu valodu.", "hint": "ai em lēnin ingliš", "de": "Ich lerne Englisch.", "hook": "learn – lernen", "pic": "📖" },
@@ -276,6 +277,10 @@
           { "who": "learner", "phrase": "fromlatvia" },
           { "who": "other", "en": "Your English is very good!", "lv": "Jūsu angļu valoda ir ļoti laba!" },
           { "who": "learner", "phrase": "learning" },
+          { "who": "other", "en": "What do you do?", "lv": "Ar ko jūs nodarbojaties?" },
+          { "who": "learner", "phrase": "workeducation" },
+          { "who": "other", "en": "And in your free time?", "lv": "Un brīvajā laikā?" },
+          { "who": "learner", "phrase": "hobbies" },
           { "who": "other", "en": "Do you have family here?", "lv": "Vai jums šeit ir ģimene?" },
           { "who": "learner", "phrase": "daughter" },
           { "who": "other", "en": "How lovely! I'm Mary.", "lv": "Cik jauki! Es esmu Mērija." },
@@ -409,37 +414,6 @@
           { "who": "learner", "phrase": "seetomorrow" },
           { "who": "other", "en": "Lovely. Bye!", "lv": "Jauki. Atā!" },
           { "who": "learner", "phrase": "niceday" }
-        ]
-      }
-    },
-    {
-      "id": "u13",
-      "titleLv": "Ģimene",
-      "titleEn": "Family",
-      "strand": "her-world",
-      "pic": "👨‍👩‍👧",
-      "phrases": [
-        { "id": "havechildren", "en": "Do you have children?", "lv": "Vai jums ir bērni?", "hint": "du jū hev čildren?", "de": "Haben Sie Kinder?", "pic": "👨‍👩‍👦" },
-        { "id": "grandchildren", "en": "I have two grandchildren.", "lv": "Man ir divi mazbērni.", "hint": "ai hev tū grenčildren", "de": "Ich habe zwei Enkelkinder.", "pic": "👧" },
-        { "id": "tenyears", "en": "She is ten years old.", "lv": "Viņai ir desmit gadu.", "hint": "šī iz ten jīez ould", "de": "Sie ist zehn Jahre alt.", "hook": "ten – zehn, old – alt", "pic": "🎂" },
-        { "id": "seephoto", "en": "Would you like to see a photo?", "lv": "Vai gribat redzēt fotogrāfiju?", "hint": "[w]ud jū laik tu sī e foutou?", "de": "Möchten Sie ein Foto sehen?", "hook": "see – sehen", "pic": "📱" },
-        { "id": "missthem", "en": "I miss them.", "lv": "Man viņu pietrūkst.", "hint": "ai mis [z]em", "de": "Ich vermisse sie.", "pic": "💛" },
-        { "id": "visitsummer", "en": "They visit me in summer.", "lv": "Viņi mani apciemo vasarā.", "hint": "[z]ei vizit mī in same", "de": "Sie besuchen mich im Sommer.", "hook": "summer – Sommer", "pic": "🚗" },
-        { "id": "lovelyfamily", "en": "What a lovely family!", "lv": "Kāda jauka ģimene!", "hint": "[w]ot e lavli femili!", "de": "Was für eine schöne Familie!", "hook": "family – Familie", "pic": "🥰", "listenOnly": true }
-      ],
-      "dialogue": {
-        "titleLv": "Saruna ar jaunu paziņu",
-        "lines": [
-          { "who": "other", "en": "Do you have children?", "lv": "Vai jums ir bērni?" },
-          { "who": "learner", "phrase": "daughter" },
-          { "who": "other", "en": "How nice! Do you have grandchildren?", "lv": "Cik jauki! Vai jums ir mazbērni?" },
-          { "who": "learner", "phrase": "grandchildren" },
-          { "who": "other", "en": "How wonderful!", "lv": "Cik brīnišķīgi!" },
-          { "who": "learner", "phrase": "seephoto" },
-          { "who": "other", "en": "Oh yes! What a lovely family!", "lv": "Ak jā! Kāda jauka ģimene!" },
-          { "who": "learner", "phrase": "missthem" },
-          { "who": "other", "en": "Do they visit you?", "lv": "Vai viņi jūs apciemo?" },
-          { "who": "learner", "phrase": "visitsummer" }
         ]
       }
     }
