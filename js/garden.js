@@ -62,8 +62,11 @@ export function stageOf(level) {
  */
 export function gardenSvg(phrases, grown = new Set(), { units: given } = {}) {
   let units = (given || gardenUnits()).filter((u) => u.phrases.some((p) => !p.listenOnly));
-  // Weekly beds appear once she has started them.
-  units = units.filter((u) => !u.weekly || u.phrases.some((p) => phrases[keyOf(u.id, p.id)]));
+  // Beds appear as she reaches them: every started unit plus the next one waiting.
+  // Weekly beds appear only once started.
+  const started = (u) => u.phrases.some((p) => phrases[keyOf(u.id, p.id)]);
+  const next = units.find((u) => !u.weekly && !started(u));
+  units = units.filter((u) => started(u) || u === next);
   let y = 0;
   let body = '';
   let flowers = 0;

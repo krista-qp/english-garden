@@ -118,6 +118,330 @@
         ]
       },
       "question": { "en": "What do you grow in your garden?", "lv": "Ko tu audzē savā dārzā? Pastāsti angliski." }
+    },
+    {
+      "id": "u4",
+      "titleLv": "Lidostā",
+      "titleEn": "At the airport",
+      "strand": "travel",
+      "pic": "✈️",
+      "phrases": [
+        { "id": "passport", "en": "Here is my passport.", "lv": "Lūdzu, mana pase.", "hint": "hie iz mai pāspōt", "de": "Hier ist mein Reisepass.", "hook": "passport – Pass", "pic": "🛂" },
+        { "id": "checkin", "en": "Where is the check-in?", "lv": "Kur ir reģistrācija?", "hint": "[w]ea iz [z]e čekin?", "de": "Wo ist der Check-in?", "pic": "🧾" },
+        { "id": "suitcase", "en": "This is my suitcase.", "lv": "Šis ir mans koferis.", "hint": "[z]is iz mai sūtkeis", "de": "Das ist mein Koffer.", "pic": "🧳" },
+        { "id": "windowseat", "en": "A window seat, please.", "lv": "Vietu pie loga, lūdzu.", "hint": "e [w]indou sīt, plīz", "de": "Einen Fensterplatz, bitte.", "pic": "🪟" },
+        { "id": "whichgate", "en": "Which gate?", "lv": "Kura izeja?", "hint": "[w]ič geit?", "de": "Welches Gate?", "hook": "which – welches", "pic": "🚪" },
+        { "id": "flightlate", "en": "Is the flight late?", "lv": "Vai reiss kavējas?", "hint": "iz [z]e flait leit?", "de": "Hat der Flug Verspätung?", "hook": "flight – Flug", "pic": "⏰" },
+        { "id": "toilets", "en": "Where are the toilets?", "lv": "Kur ir tualetes?", "hint": "[w]ea ā [z]e toilets?", "de": "Wo sind die Toiletten?", "hook": "toilets – Toiletten", "pic": "🚻" },
+        { "id": "boardingpass", "en": "Boarding pass, please.", "lv": "Iekāpšanas karti, lūdzu.", "hint": "bōdin pās, plīz", "de": "Bordkarte, bitte.", "pic": "🎫", "listenOnly": true }
+      ],
+      "dialogue": {
+        "titleLv": "Pie reģistrācijas",
+        "lines": [
+          { "who": "other", "en": "Good morning! Passport, please.", "lv": "Labrīt! Pasi, lūdzu." },
+          { "who": "learner", "phrase": "passport" },
+          { "who": "other", "en": "Thank you. Any bags?", "lv": "Paldies. Vai jums ir bagāža?" },
+          { "who": "learner", "phrase": "suitcase" },
+          { "who": "other", "en": "Window or aisle?", "lv": "Pie loga vai pie ejas?" },
+          { "who": "learner", "phrase": "windowseat" },
+          { "who": "other", "en": "Here is your boarding pass.", "lv": "Lūk, jūsu iekāpšanas karte." },
+          { "who": "learner", "phrase": "whichgate" },
+          { "who": "other", "en": "Gate twelve. Have a good flight!", "lv": "Divpadsmitā izeja. Laimīgu lidojumu!" },
+          { "who": "learner", "phrase": "thankyou" }
+        ]
+      }
+    },
+    {
+      "id": "u5",
+      "titleLv": "Viesnīcā",
+      "titleEn": "At the hotel",
+      "strand": "travel",
+      "pic": "🏨",
+      "phrases": [
+        { "id": "reservation", "en": "I have a reservation.", "lv": "Man ir rezervācija.", "hint": "ai hev e rezeveišn", "de": "Ich habe eine Reservierung.", "hook": "reservation – Reservierung", "pic": "📋" },
+        { "id": "twonights", "en": "For two nights.", "lv": "Uz divām naktīm.", "hint": "fō tū naits", "de": "Für zwei Nächte.", "hook": "night – Nacht", "pic": "🌙" },
+        { "id": "mykey", "en": "My key, please.", "lv": "Manu atslēgu, lūdzu.", "hint": "mai kī, plīz", "de": "Meinen Schlüssel, bitte.", "pic": "🔑" },
+        { "id": "breakfast", "en": "What time is breakfast?", "lv": "Cikos ir brokastis?", "hint": "[w]ot taim iz brekfest?", "de": "Wann gibt es Frühstück?", "pic": "🥐" },
+        { "id": "wifi", "en": "What is the Wi-Fi password?", "lv": "Kāda ir Wi-Fi parole?", "hint": "[w]ot iz [z]e [w]aifai pās[w]ēd?", "de": "Wie ist das WLAN-Passwort?", "hook": "password – Passwort", "pic": "📶" },
+        { "id": "roomcold", "en": "The room is too cold.", "lv": "Istabā ir par aukstu.", "hint": "[z]e rūm iz tū kould", "de": "Das Zimmer ist zu kalt.", "hook": "cold – kalt", "pic": "🥶" },
+        { "id": "checkout", "en": "When is check-out?", "lv": "Cikos jāatbrīvo istaba?", "hint": "[w]en iz čekaut?", "de": "Wann ist der Check-out?", "pic": "🕚" },
+        { "id": "lift", "en": "The lift is over there.", "lv": "Lifts ir tur.", "hint": "[z]e lift iz ouve [z]ea", "de": "Der Aufzug ist dort drüben.", "pic": "🛗", "listenOnly": true }
+      ],
+      "dialogue": {
+        "titleLv": "Pie reģistratūras",
+        "lines": [
+          { "who": "other", "en": "Good evening! Can I help you?", "lv": "Labvakar! Kā varu palīdzēt?" },
+          { "who": "learner", "phrase": "reservation" },
+          { "who": "other", "en": "What's your name?", "lv": "Kā jūs sauc?" },
+          { "who": "learner", "phrase": "myname" },
+          { "who": "other", "en": "How many nights?", "lv": "Uz cik naktīm?" },
+          { "who": "learner", "phrase": "twonights" },
+          { "who": "other", "en": "Here is your key. The lift is over there.", "lv": "Lūk, jūsu atslēga. Lifts ir tur." },
+          { "who": "learner", "phrase": "breakfast" },
+          { "who": "other", "en": "From seven to ten.", "lv": "No septiņiem līdz desmitiem." },
+          { "who": "learner", "phrase": "thankyou" }
+        ]
+      }
+    },
+    {
+      "id": "u6",
+      "titleLv": "Pa pilsētu",
+      "titleEn": "Getting around",
+      "strand": "travel",
+      "pic": "🚌",
+      "phrases": [
+        { "id": "station", "en": "Where is the station?", "lv": "Kur ir stacija?", "hint": "[w]ea iz [z]e steišn?", "de": "Wo ist der Bahnhof?", "hook": "station – Station", "pic": "🚉" },
+        { "id": "oneticket", "en": "One ticket to London, please.", "lv": "Vienu biļeti uz Londonu, lūdzu.", "hint": "[w]an tikit tu landen, plīz", "de": "Eine Fahrkarte nach London, bitte.", "hook": "ticket – Ticket", "pic": "🎟️" },
+        { "id": "returnticket", "en": "A return ticket, please.", "lv": "Biļeti turp un atpakaļ, lūdzu.", "hint": "e ritēn tikit, plīz", "de": "Eine Rückfahrkarte, bitte.", "pic": "🔄" },
+        { "id": "thisbus", "en": "Does this bus go to the centre?", "lv": "Vai šis autobuss brauc uz centru?", "hint": "daz [z]is bas gou tu [z]e sente?", "de": "Fährt dieser Bus ins Zentrum?", "hook": "bus – Bus, centre – Zentrum", "pic": "🚌" },
+        { "id": "isitfar", "en": "Is it far?", "lv": "Vai tas ir tālu?", "hint": "iz it fā?", "de": "Ist es weit?", "pic": "📍" },
+        { "id": "map", "en": "Can you show me on the map?", "lv": "Vai varat man parādīt kartē?", "hint": "ken jū šou mī on [z]e mep?", "de": "Können Sie es mir auf der Karte zeigen?", "pic": "🗺️" },
+        { "id": "taxi", "en": "I need a taxi.", "lv": "Man vajag taksometru.", "hint": "ai nīd e teksi", "de": "Ich brauche ein Taxi.", "hook": "taxi – Taxi", "pic": "🚕" },
+        { "id": "leftright", "en": "Turn left, then right.", "lv": "Pagriezieties pa kreisi, tad pa labi.", "hint": "tēn left, [z]en rait", "de": "Biegen Sie links ab, dann rechts.", "hook": "right – rechts", "pic": "↪️", "listenOnly": true }
+      ],
+      "dialogue": {
+        "titleLv": "Uz ielas un stacijā",
+        "lines": [
+          { "who": "other", "en": "Hello! Can I help you?", "lv": "Sveiki! Vai varu palīdzēt?" },
+          { "who": "learner", "phrase": "station" },
+          { "who": "other", "en": "Turn left, then right.", "lv": "Pagriezieties pa kreisi, tad pa labi.", "speed": "fast" },
+          { "who": "learner", "phrase": "slowly" },
+          { "who": "other", "en": "Turn left, then right.", "lv": "Pagriezieties pa kreisi, tad pa labi.", "speed": "slow" },
+          { "who": "learner", "phrase": "isitfar" },
+          { "who": "other", "en": "No, five minutes.", "lv": "Nē, piecas minūtes." },
+          { "who": "learner", "phrase": "thankyou" },
+          { "who": "other", "en": "Next, please!", "lv": "Nākamais, lūdzu!" },
+          { "who": "learner", "phrase": "oneticket" },
+          { "who": "other", "en": "Single or return?", "lv": "Vienā virzienā vai turp un atpakaļ?" },
+          { "who": "learner", "phrase": "returnticket" },
+          { "who": "other", "en": "That's twenty pounds.", "lv": "Tas būs divdesmit mārciņas." },
+          { "who": "learner", "phrase": "card" }
+        ]
+      }
+    },
+    {
+      "id": "u7",
+      "titleLv": "Muzejā",
+      "titleEn": "At the museum",
+      "strand": "travel",
+      "pic": "🏛️",
+      "phrases": [
+        { "id": "museumopen", "en": "When does the museum open?", "lv": "Kad muzejs atveras?", "hint": "[w]en daz [z]e mjūzīem oupen?", "de": "Wann öffnet das Museum?", "hook": "museum – Museum, open – offen", "pic": "🏛️" },
+        { "id": "twotickets", "en": "Two tickets, please.", "lv": "Divas biļetes, lūdzu.", "hint": "tū tikits, plīz", "de": "Zwei Karten, bitte.", "pic": "🎫" },
+        { "id": "discount", "en": "Is there a discount for pensioners?", "lv": "Vai pensionāriem ir atlaide?", "hint": "iz [z]ea e diskaunt fō penšenez?", "de": "Gibt es eine Ermäßigung für Rentner?", "pic": "👵" },
+        { "id": "takephoto", "en": "Can I take a photo?", "lv": "Vai drīkstu fotografēt?", "hint": "ken ai teik e foutou?", "de": "Darf ich ein Foto machen?", "hook": "photo – Foto", "pic": "📷" },
+        { "id": "audioguide", "en": "An audio guide, please.", "lv": "Audiogidu, lūdzu.", "hint": "en ōdiou gaid, plīz", "de": "Einen Audioguide, bitte.", "pic": "🎧" },
+        { "id": "painting", "en": "I like this painting.", "lv": "Man patīk šī glezna.", "hint": "ai laik [z]is peintin", "de": "Mir gefällt dieses Bild.", "pic": "🖼️" },
+        { "id": "cafehere", "en": "Is there a café here?", "lv": "Vai šeit ir kafejnīca?", "hint": "iz [z]ea e kefei hie?", "de": "Gibt es hier ein Café?", "hook": "café – Café", "pic": "🍰" },
+        { "id": "nophotos", "en": "No photos, please.", "lv": "Lūdzu, nefotografējiet.", "hint": "nou foutouz, plīz", "de": "Bitte keine Fotos.", "pic": "🚫", "listenOnly": true }
+      ],
+      "dialogue": {
+        "titleLv": "Pie muzeja kases",
+        "lines": [
+          { "who": "other", "en": "Hello! How can I help?", "lv": "Sveiki! Kā varu palīdzēt?" },
+          { "who": "learner", "phrase": "twotickets" },
+          { "who": "other", "en": "That's thirty pounds.", "lv": "Tas būs trīsdesmit mārciņas." },
+          { "who": "learner", "phrase": "discount" },
+          { "who": "other", "en": "Yes. Then it's twenty pounds.", "lv": "Jā. Tad tas būs divdesmit mārciņas." },
+          { "who": "learner", "phrase": "card" },
+          { "who": "other", "en": "Of course. Here you are.", "lv": "Protams. Lūdzu." },
+          { "who": "learner", "phrase": "takephoto" },
+          { "who": "other", "en": "Yes, but no flash, please.", "lv": "Jā, bet bez zibspuldzes, lūdzu." },
+          { "who": "learner", "phrase": "thankyou" }
+        ]
+      }
+    },
+    {
+      "id": "u8",
+      "titleLv": "Par sevi",
+      "titleEn": "About me",
+      "strand": "her-world",
+      "pic": "🙋‍♀️",
+      "phrases": [
+        { "id": "livelatvia", "en": "I live in Latvia.", "lv": "Es dzīvoju Latvijā.", "hint": "ai liv in letvija", "de": "Ich wohne in Lettland.", "pic": "🏠" },
+        { "id": "retired", "en": "I am retired.", "lv": "Esmu pensijā.", "hint": "ai em ritaied", "de": "Ich bin in Rente.", "pic": "🪑" },
+        { "id": "daughter", "en": "My daughter lives in Sweden.", "lv": "Mana meita dzīvo Zviedrijā.", "hint": "mai dōte livz in s[w]īdn", "de": "Meine Tochter wohnt in Schweden.", "hook": "daughter – Tochter", "pic": "👩" },
+        { "id": "speakgerman", "en": "I speak a little German.", "lv": "Es mazliet runāju vāciski.", "hint": "ai spīk e litl džēmen", "de": "Ich spreche ein bisschen Deutsch.", "pic": "🗣️" },
+        { "id": "learning", "en": "I am learning English.", "lv": "Es mācos angļu valodu.", "hint": "ai em lēnin ingliš", "de": "Ich lerne Englisch.", "hook": "learn – lernen", "pic": "📖" },
+        { "id": "firsttime", "en": "It's my first time in England.", "lv": "Esmu Anglijā pirmo reizi.", "hint": "its mai fēst taim in inglend", "de": "Ich bin zum ersten Mal in England.", "hook": "first – erste", "pic": "🌍" },
+        { "id": "holiday", "en": "I am on holiday.", "lv": "Esmu atpūtas braucienā.", "hint": "ai em on holidei", "de": "Ich bin im Urlaub.", "pic": "🏖️" },
+        { "id": "wherelive", "en": "Where do you live?", "lv": "Kur jūs dzīvojat?", "hint": "[w]ea du jū liv?", "de": "Wo wohnen Sie?", "pic": "🏘️", "listenOnly": true }
+      ],
+      "dialogue": {
+        "titleLv": "Saruna kafejnīcā",
+        "lines": [
+          { "who": "other", "en": "Hello! Are you on holiday?", "lv": "Sveiki! Vai esat atpūtas braucienā?" },
+          { "who": "learner", "phrase": "holiday" },
+          { "who": "other", "en": "Where are you from?", "lv": "No kurienes jūs esat?" },
+          { "who": "learner", "phrase": "fromlatvia" },
+          { "who": "other", "en": "Your English is very good!", "lv": "Jūsu angļu valoda ir ļoti laba!" },
+          { "who": "learner", "phrase": "learning" },
+          { "who": "other", "en": "Do you have family here?", "lv": "Vai jums šeit ir ģimene?" },
+          { "who": "learner", "phrase": "daughter" },
+          { "who": "other", "en": "How lovely! I'm Mary.", "lv": "Cik jauki! Es esmu Mērija." },
+          { "who": "learner", "phrase": "nicetomeet" }
+        ]
+      }
+    },
+    {
+      "id": "u9",
+      "titleLv": "Ja kaut kas noiet greizi",
+      "titleEn": "When something goes wrong",
+      "strand": "travel",
+      "pic": "🆘",
+      "phrases": [
+        { "id": "help", "en": "Help, please!", "lv": "Palīdziet, lūdzu!", "hint": "help, plīz!", "de": "Hilfe, bitte!", "hook": "help – Hilfe", "pic": "🆘" },
+        { "id": "imlost", "en": "I am lost.", "lv": "Esmu apmaldījusies.", "hint": "ai em lost", "de": "Ich habe mich verirrt.", "pic": "🧭" },
+        { "id": "lostbag", "en": "I have lost my bag.", "lv": "Es pazaudēju savu somu.", "hint": "ai hev lost mai beg", "de": "Ich habe meine Tasche verloren.", "hook": "lost – verloren", "pic": "👜" },
+        { "id": "phonedead", "en": "My phone is not working.", "lv": "Mans telefons nedarbojas.", "hint": "mai foun iz not [w]ēkin", "de": "Mein Handy funktioniert nicht.", "pic": "📵" },
+        { "id": "notwell", "en": "I don't feel well.", "lv": "Es nejūtos labi.", "hint": "ai dount fīl [w]el", "de": "Ich fühle mich nicht gut.", "hook": "feel – fühlen", "pic": "🤒" },
+        { "id": "ambulance", "en": "Please call an ambulance.", "lv": "Lūdzu, izsauciet ātro palīdzību.", "hint": "plīz kōl en embjulens", "de": "Bitte rufen Sie einen Krankenwagen.", "pic": "🚑" },
+        { "id": "policestation", "en": "Where is the police station?", "lv": "Kur ir policijas iecirknis?", "hint": "[w]ea iz [z]e polīs steišn?", "de": "Wo ist die Polizeiwache?", "hook": "police – Polizei", "pic": "👮" },
+        { "id": "dontworry", "en": "Don't worry, I can help.", "lv": "Neuztraucieties, es varu palīdzēt.", "hint": "dount [w]ari, ai ken help", "de": "Keine Sorge, ich kann helfen.", "hook": "help – helfen", "pic": "🤝", "listenOnly": true }
+      ],
+      "dialogue": {
+        "titleLv": "Pazudusī soma",
+        "lines": [
+          { "who": "other", "en": "Are you all right?", "lv": "Vai jums viss kārtībā?" },
+          { "who": "learner", "phrase": "lostbag" },
+          { "who": "other", "en": "Oh no! Can you call someone?", "lv": "Ak nē! Vai varat kādam piezvanīt?" },
+          { "who": "learner", "phrase": "phonedead" },
+          { "who": "other", "en": "Don't worry, I can help.", "lv": "Neuztraucieties, es varu palīdzēt." },
+          { "who": "learner", "phrase": "policestation" },
+          { "who": "other", "en": "It's near here, on the left.", "lv": "Tas ir netālu, pa kreisi." },
+          { "who": "learner", "phrase": "thankyou" }
+        ]
+      }
+    },
+    {
+      "id": "u10",
+      "titleLv": "Veikalā un tirgū",
+      "titleEn": "Shopping",
+      "strand": "travel",
+      "pic": "🛒",
+      "phrases": [
+        { "id": "justlooking", "en": "I'm just looking, thank you.", "lv": "Es tikai skatos, paldies.", "hint": "aim džast lukin, [s]enk jū", "de": "Ich schaue nur, danke.", "pic": "👀" },
+        { "id": "inblue", "en": "Do you have this in blue?", "lv": "Vai jums tas ir zilā krāsā?", "hint": "du jū hev [z]is in blū?", "de": "Haben Sie das in Blau?", "hook": "blue – blau", "pic": "👗" },
+        { "id": "biggersize", "en": "A bigger size, please.", "lv": "Lielāku izmēru, lūdzu.", "hint": "e bige saiz, plīz", "de": "Eine größere Größe, bitte.", "pic": "📏" },
+        { "id": "tryon", "en": "Can I try it on?", "lv": "Vai varu to uzlaikot?", "hint": "ken ai trai it on?", "de": "Kann ich es anprobieren?", "pic": "🪞" },
+        { "id": "apples", "en": "A kilo of apples, please.", "lv": "Kilogramu ābolu, lūdzu.", "hint": "e kīlou ov eplz, plīz", "de": "Ein Kilo Äpfel, bitte.", "hook": "apple – Apfel", "pic": "🍏" },
+        { "id": "tooexpensive", "en": "It's too expensive.", "lv": "Tas ir par dārgu.", "hint": "its tū ikspensiv", "de": "Das ist zu teuer.", "pic": "💸" },
+        { "id": "illtakeit", "en": "I'll take it.", "lv": "Es to ņemšu.", "hint": "ail teik it", "de": "Ich nehme es.", "pic": "🛍️" },
+        { "id": "nothanks", "en": "No, thank you.", "lv": "Nē, paldies.", "hint": "nou, [s]enk jū", "de": "Nein, danke.", "pic": "🙅‍♀️" },
+        { "id": "needbag", "en": "Do you need a bag?", "lv": "Vai jums vajag maisiņu?", "hint": "du jū nīd e beg?", "de": "Brauchen Sie eine Tüte?", "pic": "🧺", "listenOnly": true }
+      ],
+      "dialogue": {
+        "titleLv": "Tirgū",
+        "lines": [
+          { "who": "other", "en": "Good morning! What would you like?", "lv": "Labrīt! Ko jūs vēlētos?" },
+          { "who": "learner", "phrase": "apples" },
+          { "who": "other", "en": "Anything else?", "lv": "Vēl kaut ko?" },
+          { "who": "learner", "phrase": "howmuch" },
+          { "who": "other", "en": "Two pounds, please.", "lv": "Divas mārciņas, lūdzu." },
+          { "who": "learner", "phrase": "card" },
+          { "who": "other", "en": "Yes, of course. Do you need a bag?", "lv": "Jā, protams. Vai jums vajag maisiņu?" },
+          { "who": "learner", "phrase": "nothanks" },
+          { "who": "other", "en": "Have a nice day!", "lv": "Jauku dienu!" },
+          { "who": "learner", "phrase": "goodbye" }
+        ]
+      }
+    },
+    {
+      "id": "u11",
+      "titleLv": "Aptiekā un pie ārsta",
+      "titleEn": "Pharmacy and doctor",
+      "strand": "travel",
+      "pic": "💊",
+      "phrases": [
+        { "id": "headache", "en": "I have a headache.", "lv": "Man sāp galva.", "hint": "ai hev e hedeik", "de": "Ich habe Kopfschmerzen.", "pic": "🤕" },
+        { "id": "sorethroat", "en": "I have a sore throat.", "lv": "Man sāp kakls.", "hint": "ai hev e sō [s]rout", "de": "Ich habe Halsschmerzen.", "pic": "🧣" },
+        { "id": "forcold", "en": "Do you have something for a cold?", "lv": "Vai jums ir kaut kas pret saaukstēšanos?", "hint": "du jū hev sam[s]in fōr e kould?", "de": "Haben Sie etwas gegen Erkältung?", "pic": "🤧" },
+        { "id": "prescription", "en": "Here is my prescription.", "lv": "Lūdzu, mana recepte.", "hint": "hie iz mai priskripšn", "de": "Hier ist mein Rezept.", "pic": "📝" },
+        { "id": "allergic", "en": "I am allergic to penicillin.", "lv": "Man ir alerģija pret penicilīnu.", "hint": "ai em elēdžik tu penisilin", "de": "Ich bin allergisch gegen Penicillin.", "hook": "allergic – allergisch", "pic": "⚠️" },
+        { "id": "needdoctor", "en": "I need a doctor.", "lv": "Man vajag ārstu.", "hint": "ai nīd e dokte", "de": "Ich brauche einen Arzt.", "hook": "doctor – Doktor", "pic": "🩺" },
+        { "id": "howoften", "en": "How often do I take it?", "lv": "Cik bieži man tās jālieto?", "hint": "hau ofn du ai teik it?", "de": "Wie oft muss ich das nehmen?", "hook": "often – oft", "pic": "💊" },
+        { "id": "twiceaday", "en": "Twice a day, after meals.", "lv": "Divreiz dienā, pēc ēšanas.", "hint": "t[w]ais e dei, āfte mīlz", "de": "Zweimal am Tag, nach dem Essen.", "hook": "day – Tag", "pic": "🕑", "listenOnly": true }
+      ],
+      "dialogue": {
+        "titleLv": "Aptiekā",
+        "lines": [
+          { "who": "other", "en": "Hello! How can I help?", "lv": "Sveiki! Kā varu palīdzēt?" },
+          { "who": "learner", "phrase": "forcold" },
+          { "who": "other", "en": "Do you have a sore throat?", "lv": "Vai jums sāp kakls?" },
+          { "who": "learner", "phrase": "sorethroat" },
+          { "who": "other", "en": "Are you allergic to anything?", "lv": "Vai jums ir kāda alerģija?" },
+          { "who": "learner", "phrase": "allergic" },
+          { "who": "other", "en": "These are fine. Here you are.", "lv": "Šīs ir piemērotas. Lūdzu." },
+          { "who": "learner", "phrase": "howoften" },
+          { "who": "other", "en": "Twice a day, after meals.", "lv": "Divreiz dienā, pēc ēšanas." },
+          { "who": "learner", "phrase": "thankyou" }
+        ]
+      }
+    },
+    {
+      "id": "u12",
+      "titleLv": "Laiks un sarunas",
+      "titleEn": "Weather and small talk",
+      "strand": "her-world",
+      "pic": "🌤️",
+      "phrases": [
+        { "id": "howareyou", "en": "How are you?", "lv": "Kā jums klājas?", "hint": "hau ā jū?", "de": "Wie geht es Ihnen?", "pic": "😊" },
+        { "id": "finethanks", "en": "I'm fine, thank you. And you?", "lv": "Labi, paldies. Un jums?", "hint": "aim fain, [s]enk jū. end jū?", "de": "Gut, danke. Und Ihnen?", "pic": "👍" },
+        { "id": "lovelyday", "en": "It's a lovely day!", "lv": "Šodien ir jauka diena!", "hint": "its e lavli dei!", "de": "Was für ein schöner Tag!", "hook": "day – Tag", "pic": "🌞" },
+        { "id": "raining", "en": "It's raining again.", "lv": "Atkal līst.", "hint": "its reinin egen", "de": "Es regnet schon wieder.", "hook": "rain – Regen", "pic": "🌧️" },
+        { "id": "coldtoday", "en": "It's cold today.", "lv": "Šodien ir auksts.", "hint": "its kould tudei", "de": "Heute ist es kalt.", "hook": "cold – kalt", "pic": "❄️" },
+        { "id": "seetomorrow", "en": "See you tomorrow!", "lv": "Tiekamies rīt!", "hint": "sī jū tumorou!", "de": "Bis morgen!", "hook": "tomorrow – morgen", "pic": "📅" },
+        { "id": "niceday", "en": "Have a nice day!", "lv": "Jauku dienu!", "hint": "hev e nais dei!", "de": "Schönen Tag noch!", "hook": "day – Tag", "pic": "🌷" },
+        { "id": "notbad", "en": "Not bad, thanks.", "lv": "Nav slikti, paldies.", "hint": "not bed, [s]enks", "de": "Nicht schlecht, danke.", "pic": "🙂", "listenOnly": true }
+      ],
+      "dialogue": {
+        "titleLv": "Uz soliņa parkā",
+        "lines": [
+          { "who": "other", "en": "Good morning! How are you?", "lv": "Labrīt! Kā jums klājas?" },
+          { "who": "learner", "phrase": "finethanks" },
+          { "who": "other", "en": "Not bad, thanks.", "lv": "Nav slikti, paldies." },
+          { "who": "learner", "phrase": "lovelyday" },
+          { "who": "other", "en": "Yes! Yesterday it was raining.", "lv": "Jā! Vakar lija." },
+          { "who": "learner", "phrase": "beautiful" },
+          { "who": "other", "en": "Do you like flowers?", "lv": "Vai jums patīk puķes?" },
+          { "who": "learner", "phrase": "roses" },
+          { "who": "other", "en": "Me too. See you tomorrow?", "lv": "Man arī. Tiekamies rīt?" },
+          { "who": "learner", "phrase": "seetomorrow" },
+          { "who": "other", "en": "Lovely. Bye!", "lv": "Jauki. Atā!" },
+          { "who": "learner", "phrase": "niceday" }
+        ]
+      }
+    },
+    {
+      "id": "u13",
+      "titleLv": "Ģimene",
+      "titleEn": "Family",
+      "strand": "her-world",
+      "pic": "👨‍👩‍👧",
+      "phrases": [
+        { "id": "havechildren", "en": "Do you have children?", "lv": "Vai jums ir bērni?", "hint": "du jū hev čildren?", "de": "Haben Sie Kinder?", "pic": "👨‍👩‍👦" },
+        { "id": "grandchildren", "en": "I have two grandchildren.", "lv": "Man ir divi mazbērni.", "hint": "ai hev tū grenčildren", "de": "Ich habe zwei Enkelkinder.", "pic": "👧" },
+        { "id": "tenyears", "en": "She is ten years old.", "lv": "Viņai ir desmit gadu.", "hint": "šī iz ten jīez ould", "de": "Sie ist zehn Jahre alt.", "hook": "ten – zehn, old – alt", "pic": "🎂" },
+        { "id": "seephoto", "en": "Would you like to see a photo?", "lv": "Vai gribat redzēt fotogrāfiju?", "hint": "[w]ud jū laik tu sī e foutou?", "de": "Möchten Sie ein Foto sehen?", "hook": "see – sehen", "pic": "📱" },
+        { "id": "missthem", "en": "I miss them.", "lv": "Man viņu pietrūkst.", "hint": "ai mis [z]em", "de": "Ich vermisse sie.", "pic": "💛" },
+        { "id": "visitsummer", "en": "They visit me in summer.", "lv": "Viņi mani apciemo vasarā.", "hint": "[z]ei vizit mī in same", "de": "Sie besuchen mich im Sommer.", "hook": "summer – Sommer", "pic": "🚗" },
+        { "id": "lovelyfamily", "en": "What a lovely family!", "lv": "Kāda jauka ģimene!", "hint": "[w]ot e lavli femili!", "de": "Was für eine schöne Familie!", "hook": "family – Familie", "pic": "🥰", "listenOnly": true }
+      ],
+      "dialogue": {
+        "titleLv": "Saruna ar jaunu paziņu",
+        "lines": [
+          { "who": "other", "en": "Do you have children?", "lv": "Vai jums ir bērni?" },
+          { "who": "learner", "phrase": "daughter" },
+          { "who": "other", "en": "How nice! Do you have grandchildren?", "lv": "Cik jauki! Vai jums ir mazbērni?" },
+          { "who": "learner", "phrase": "grandchildren" },
+          { "who": "other", "en": "How wonderful!", "lv": "Cik brīnišķīgi!" },
+          { "who": "learner", "phrase": "seephoto" },
+          { "who": "other", "en": "Oh yes! What a lovely family!", "lv": "Ak jā! Kāda jauka ģimene!" },
+          { "who": "learner", "phrase": "missthem" },
+          { "who": "other", "en": "Do they visit you?", "lv": "Vai viņi jūs apciemo?" },
+          { "who": "learner", "phrase": "visitsummer" }
+        ]
+      }
     }
   ]
 }
