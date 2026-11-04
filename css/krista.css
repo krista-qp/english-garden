@@ -37,3 +37,7 @@ html { font-size: 16px; }
 .k-preview .de-line { color: var(--muted); margin: 0; }
 .k-code { font-family: ui-monospace, Menlo, Consolas, monospace; word-break: break-all; background: var(--surface-2); padding: 6px 8px; border-radius: 8px; }
 .k-dlg { margin: 0; padding-left: 1.2em; }
+.k-trouble { margin: 8px 0 0; padding-left: 1.4em; display: grid; gap: 10px; }
+.k-trouble li p { margin: 0; }
+.k-trouble b { font-family: var(--serif); font-weight: 400; font-size: 1.25rem; }
+.k-heard { color: var(--muted); font-size: 0.95rem; }

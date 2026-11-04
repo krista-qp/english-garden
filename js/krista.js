@@ -177,7 +177,34 @@ function renderProgress() {
     </div>
     <ul class="k-units">${rows.join('')}</ul>
     <div class="k-garden">${gardenSvg(phrases, new Set(), { units })}</div>
+    ${troubleHtml(learner.trouble || {}, units, learner.name || 'Mamma')}
     <p class="muted">Atjaunināts: ${esc(fmtTime(learner.updatedAt))}</p>`;
+}
+
+const lvDay = (k) => {
+  if (!k) return '';
+  const [y, m, d] = k.split('-').map(Number);
+  return new Date(y, m - 1, d).toLocaleDateString('lv-LV', { day: 'numeric', month: 'long' });
+};
+
+/** The phrases the speech check missed most, with what the phone heard instead. */
+function troubleHtml(trouble, units, name) {
+  const byKey = new Map(units.flatMap((u) => u.phrases.map((p) => [keyOf(u.id, p.id), p])));
+  const rows = Object.entries(trouble)
+    .map(([k, t]) => ({ p: byKey.get(k), t, score: (t.misses || 0) + 2 * (t.giveUps || 0) }))
+    .filter((r) => r.p && r.score > 0)
+    .sort((a, b) => b.score - a.score || (b.t.last || '').localeCompare(a.t.last || ''))
+    .slice(0, 10);
+  const body = rows.length
+    ? `<ol class="k-trouble">${rows.map(({ p, t }) => `<li>
+        <p><b lang="en-GB">${esc(p.en.replaceAll('{name}', name))}</b> <span class="muted">${esc(p.lv.replaceAll('{name}', name))}</span></p>
+        <p class="k-meta">Nesaprata ${t.misses || 0}×${t.giveUps ? ` · pārgāja tālāk ${t.giveUps}×` : ''}${t.last ? ` · pēdējo reizi ${esc(lvDay(t.last))}` : ''}</p>
+        ${t.heard?.length ? `<p class="k-heard">Telefons dzirdēja: ${t.heard.map((h) => `«<span lang="en">${esc(h)}</span>»`).join(', ')}</p>` : ''}
+      </li>`).join('')}</ol>`
+    : '<p class="muted">Pagaidām nav. Runas pārbaude visu saprata.</p>';
+  return `<h3>Grūtākie teikumi</h3>
+    <p class="muted">Teikumi, ko runas pārbaude visbiežāk nesaprata. Ja telefons dzird ko līdzīgu, vainīga var būt izruna vai pati pārbaude.</p>
+    ${body}`;
 }
 
 /* ---------- inbox ---------- */

@@ -331,3 +331,16 @@ h2.en { font-size: 2.2rem; text-align: left; }
 .pb-en { font-family: var(--serif); font-size: 1.55rem; line-height: 1.2; }
 .pb-lv { color: var(--muted); }
 .pb-btns { grid-column: 1 / -1; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+
+/* ---------- phrasebook: show one phrase large ---------- */
+
+.pb-btns { grid-template-columns: repeat(3, 1fr); gap: 6px; }
+.pb-btns .btn-small { padding: 8px 6px; gap: 6px; font-size: 0.92rem; }
+.show-screen { background: var(--surface); }
+.show-screen .actions { background: linear-gradient(to bottom, transparent, var(--surface) 18px); }
+.show-content { display: flex; flex-direction: column; justify-content: center; gap: 18px; }
+.show-en {
+  margin: 0; font-family: var(--serif); font-size: clamp(2.8rem, 12.5vw, 4.6rem); line-height: 1.05;
+  letter-spacing: -0.015em; overflow-wrap: anywhere;
+}
+.show-lv { margin: 0; color: var(--muted); font-size: 1.1rem; }

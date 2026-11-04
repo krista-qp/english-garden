@@ -47,6 +47,7 @@ app.addEventListener('submit', (e) => {
 function mount(name, html, h = {}) {
   gen++;
   screenName = name;
+  releaseWake();
   cancelSpeech();
   stopListening();
   cancelRecording();
@@ -345,27 +346,46 @@ function speakControls(hintText = '') {
     <div class="slot" id="slot">${useFallback() ? btn('said', `${icon('✅')} Pateicu`, 'primary') : btn('speak', `${icon('🎤')} Runāt`, 'primary')}</div>`;
 }
 
+/** Returns {result: 'pass'|'fail'|'fallback', heard?: string, silent?: boolean}. */
 async function recognise(expected) {
   const r = await listen();
   if (r.error) {
     if (r.error === 'not-allowed' || r.error === 'service-not-allowed') {
       S.settings.checkSpeech = false;
       save();
-      return 'fallback';
+      return { result: 'fallback' };
     }
-    if (['network', 'unavailable', 'audio-capture', 'language-not-supported', 'busy'].includes(r.error)) return 'fallback';
-    return 'fail';
+    if (['network', 'unavailable', 'audio-capture', 'language-not-supported', 'busy'].includes(r.error)) return { result: 'fallback' };
+    return { result: 'fail', silent: true }; // nothing heard: a microphone moment, not a hard phrase
   }
-  return isUnderstood(expected, r.alts, nameOf()) ? 'pass' : 'fail';
+  return isUnderstood(expected, r.alts, nameOf()) ? { result: 'pass' } : { result: 'fail', heard: r.alts[0] };
+}
+
+/**
+ * Notes a speaking difficulty for Krista's page: misses (not understood),
+ * giveUps (moved on after two tries) and the last few things the phone heard.
+ */
+function noteTrouble(key, { heard, gaveUp } = {}) {
+  if (!key) return;
+  const t = (S.trouble ||= {})[key] || (S.trouble[key] = { misses: 0, giveUps: 0, heard: [] });
+  if (heard !== undefined) {
+    t.misses++;
+    const h = String(heard || '').trim().slice(0, 80);
+    if (h) t.heard = [h, ...t.heard.filter((x) => x.toLowerCase() !== h.toLowerCase())].slice(0, 3);
+  }
+  if (gaveUp) t.giveUps++;
+  t.last = dayKey();
+  save();
 }
 
 /**
  * Wires the speak/said handlers. Two tries, then move on. Speaking is never scored.
  * onAttempt(ok, last) runs after each try; onDone(passed) once at the end.
  */
-function wireSpeaking(h, { expected, onAttempt, onDone, onNext }) {
+function wireSpeaking(h, { expected, key, onAttempt, onDone, onNext }) {
   let tries = 0;
   let finished = false;
+  let busy = false; // one attempt at a time: a second tap during feedback must not count again
   const my = gen;
   const done = async (passed) => {
     finished = true;
@@ -377,20 +397,23 @@ function wireSpeaking(h, { expected, onAttempt, onDone, onNext }) {
     }
   };
   h.speak = async (el) => {
-    if (finished) return;
+    if (finished || busy) return;
+    busy = true;
     el.disabled = true;
     el.classList.add('listening');
     setFb(MSG.listening, 'listening');
-    const r = await recognise(expected);
+    const { result: r, heard, silent } = await recognise(expected);
     if (my !== gen) return;
-    el.disabled = false;
     el.classList.remove('listening');
+    if (r === 'fail' && !silent) noteTrouble(key, { heard });
     if (r === 'fallback') {
+      busy = false;
       setFb(MSG.fallback);
       setSlot(btn('said', `${icon('✅')} Pateicu`, 'primary'));
       return;
     }
     if (r === 'pass') {
+      finished = true;
       setFb(MSG.ok, 'ok');
       countSaid();
       await onAttempt?.(true, true);
@@ -398,12 +421,17 @@ function wireSpeaking(h, { expected, onAttempt, onDone, onNext }) {
     }
     tries++;
     if (tries >= 2) {
+      finished = true;
+      noteTrouble(key, { gaveUp: true });
       setFb(MSG.moveOn, 'soft');
       await onAttempt?.(false, true);
       return done(false);
     }
     setFb(MSG.again, 'soft');
     await onAttempt?.(false, false);
+    if (my !== gen) return;
+    busy = false;
+    el.disabled = false;
   };
   h.said = async () => {
     if (finished) return;
@@ -411,7 +439,6 @@ function wireSpeaking(h, { expected, onAttempt, onDone, onNext }) {
     setFb(MSG.saidOk, 'ok');
     countSaid();
     await onAttempt?.(true, true);
-    finished = false;
     return done(true);
   };
 }
@@ -515,6 +542,7 @@ function renderNew(st) {
   if (!p.listenOnly) {
     wireSpeaking(h, {
       expected: p.en,
+      key: st.key,
       onAttempt: async (ok, last) => {
         if (!ok && !last) await speak(text);
       },
@@ -596,6 +624,7 @@ function renderReview(st) {
   );
   wireSpeaking(h, {
     expected: p.en,
+    key: st.key,
     onAttempt: async () => {
       const a = document.getElementById('answer');
       if (a) a.hidden = false;
@@ -705,6 +734,7 @@ function renderDialogue(st) {
       setSlot(useFallback() ? btn('said', `${icon('✅')} Pateicu`, 'primary') : btn('speak', `${icon('🎤')} Runāt`, 'primary'));
       wireSpeaking(h, {
         expected: p.en,
+        key: r.key,
         onAttempt: async (ok, last) => {
           if (!ok && !last) await speak(text);
         },
@@ -782,7 +812,7 @@ function renderClose() {
 
 /* ---------- Ceļojuma vārdnīca ---------- */
 
-function renderPhrasebook() {
+function renderPhrasebook(scrollTo = 0) {
   const sections = gardenUnits()
     .map((u) => {
       const met = u.phrases.slice(0, introducedCount(u.id));
@@ -802,6 +832,7 @@ function renderPhrasebook() {
               <div class="pb-btns">
                 ${btn('say', `${icon('🔊')} Klausīties`, 'btn-small', `data-t="${esc(t)}"`)}
                 ${btn('slow', `${icon('🐢')} Lēnāk`, 'btn-small', `data-t="${esc(t)}"`)}
+                ${btn('show', `${icon('👀')} Parādīt`, 'btn-small', `data-k="${esc(keyOf(u.id, p.id))}"`)}
               </div>
             </li>`;
           })
@@ -823,8 +854,46 @@ function renderPhrasebook() {
       back: goHome,
       say: (el) => speak(el.dataset.t),
       slow: (el) => speak(el.dataset.t, { rate: RATE.slow }),
+      show: (el) => renderShowPhrase(el.dataset.k, window.scrollY),
     },
   );
+  if (scrollTo) window.scrollTo(0, scrollTo);
+}
+
+/* ---------- Parādīt: one phrase, large, to show someone ---------- */
+
+let wakeLock = null;
+function releaseWake() {
+  wakeLock?.release?.().catch(() => {});
+  wakeLock = null;
+}
+
+function renderShowPhrase(key, returnScroll) {
+  const r = phraseByKey(key);
+  if (!r) return renderPhrasebook(returnScroll);
+  const p = r.phrase;
+  const text = enOf(p);
+  mount(
+    'show',
+    `<div class="screen show-screen">
+      ${topBar(btn('back', `${icon('←')} Atpakaļ`, 'btn-quiet'))}
+      <main class="content show-content">
+        <p class="show-en" lang="en-GB">${esc(text)}</p>
+        <p class="show-lv">${esc(lvOf(p))}</p>
+      </main>
+      <footer class="actions">
+        ${btn('slow', `${icon('🐢')} Lēnāk`, 'btn-secondary')}
+        ${btn('say', `${icon('🔊')} Klausīties`, 'primary')}
+      </footer>
+    </div>`,
+    {
+      back: () => renderPhrasebook(returnScroll),
+      say: () => speak(text),
+      slow: () => speak(text, { rate: RATE.slow }),
+    },
+  );
+  // Keep the screen on while she holds it up (where the browser allows it).
+  navigator.wakeLock?.request?.('screen').then((w) => { wakeLock = w; }).catch(() => {});
 }
 
 /* ---------- Gribu iemācīties… ---------- */
